@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>
+	{% if request.user.is_authenticated %} 
+		{{request.user}},你好!
+	{% else %}
+		游客,你好!
+	{% endif %}
+	</title>
+</head>
+<body>
+{{request.path}}<br>
+{% url 'add2' 4 5 as add_url %}
+<a href="{{add_url}}">计算 4+5</a><br>
+教程列表:<br>
+ {% for i in data.course %}
+	{{i}}<br>
+ {% endfor %}
+ 
+ {% for num in data.nums %}
+	{{num}}{% if not forloop.last %},{% endif %}<br>
+ {% endfor %}
+</body>
+</html>
