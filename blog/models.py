@@ -48,5 +48,19 @@ admin.site.register(People)
 #10.filter是找出满足条件的，当然也有排除符合某条件的
 #11.Person.objects.exclude(name__contains="WZ")  # 排除包含 WZ 的Person对象
 #12.Person.objects.filter(name__contains="abc").exclude(age=23)  # 找出名称含有abc, 但是排除年龄是23岁的
-#
-#
+#三.删除对象:
+#1.Person.objects.filter(name__contains="abc").delete() # 删除 名称中包含 "abc"的人
+#people = Person.objects.filter(name__contains="abc")
+#people.delete()
+#效果也是一样的，Django实际只执行一条 SQL 语句。
+#四. 更新某个内容
+#(1).批量更新，适用于 .all()  .filter()  .exclude() 等后面 (危险操作，正式场合操作务必谨慎)
+#Person.objects.filter(name__contains="abc").update(name='xxx') # 名称中包含 "abc"的人 都改成 xxx
+#Person.objects.all().delete() # 删除所有 Person 记录
+#(2)单个 object 更新，适合于 .get(), get_or_create(), update_or_create() 等得到的 obj，和新建很类似。
+#twz = Author.objects.get(name="WeizhongTu")
+#twz.name="WeizhongTu"
+#twz.email="tuweizhong@163.com"
+#twz.save()  # 最后不要忘了保存！！！
+#五.QuerySet 是可迭代的:
+#http://code.ziqiangxuetang.com/django/django-queryset-api.html
